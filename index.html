@@ -61,6 +61,12 @@
                     <a class="nav-link" href="#strain_analysis">Strain Analysis</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="#genomecoverage_analysis">Genome Coverage</a>
+                </li>
+
+                
+
             </ul>
         </div>
     </div>
@@ -70,7 +76,7 @@
 
     <div class="container text-center p-5">
 
-        <div class="row p-5 header-use mb-5">
+        <div class="row p-5 header-use mb-3">
             <div class="col-lg-12">
                 <div class="page-header">
                     <h1 id="quality_analysis">Quality Analysis</h1>
@@ -136,7 +142,7 @@
 
     <div class="container text-center p-5">
 
-        <div class="row p-5 header-use mb-5">
+        <div class="row p-5 header-use mb-3">
             <div class="col-lg-12">
                 <div class="page-header">
                     <h1 id="quality_analysis">Standard Tasks</h1>
@@ -254,7 +260,7 @@
 
     <div class="container text-center">
 
-        <div class="row p-5 header-use">
+        <div class="row p-5 header-use mb-3">
             <div class="col-lg-12">
                 <div class="page-header">
                     <h1 id="strain_analysis">Strain Analysis</h1>
@@ -291,21 +297,6 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="card border-dark mb-2">
-                    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                        <iframe height="600" width="600"
-                                src="https://bfssiadrianverster.shinyapps.io/genome_bin_pca/"></iframe>
-                    </div>
-
-                    <div class="card-body pt-2">
-                        <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">Genome coverage PCA</span>
-                        <p class="card-description mb-4">
-                            This graph shows batch effects in the relationship between GC content and sequencing depth. Different sequencing runs will have a different correlation between GC content and sequencing depth. This graph splits the genome into bins, which vary in GC content, normalizes the sequencing depth and then uses PCA to visualize these batch effects. 
-                        </p>
-                    </div>
-                </div>
-            </div>
             <!-- <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
@@ -324,6 +315,118 @@
         </div>
 
     </div>
+
+
+
+    <div class="container text-center p-5">
+
+        <div class="row p-5 header-use mb-5">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1 id="genomecoverage_analysis">Genome Coverage</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-masonry='{"percentPosition": true }'>
+
+            <div class="col-lg-12">
+                <div class="card border-dark mb-2">
+                    <h5 class="card-header text-primary text-uppercase">Reference aligned data</h5>
+                    <div class="container w-50">
+                        <div class="row">
+                            <div class="col-lg-6">
+                        <select data-optgroup="10201" class="form-select refaligned_select_species m-3 input-sm">
+                            <option value="1001" data-sp="s__Salmonella_enterica">Salmonella enterica</option>
+                            <option value="1002" data-sp="s__Escherichia_coli">Escherichia coli</option>
+                            <option value="1002" data-sp="s__Listeria_monocytogenes" selected="selected">Listeria monocytogenes</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <select data-optgroup="10201" class="form-select refaligned_select_date m-3 input-sm">
+                            <option value="1001" data-date="Apr26">April 2022</option>
+                            <option value="1002" data-date="Jul26">July 2022</option>
+                            <option value="1002" data-date="Aug3" selected="selected">August 2022</option>
+                        </select>
+                    </div>
+                    </div>
+                        </div>
+    
+                    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Aug3_reference.html" id="refaligned"></iframe>
+                    </div>
+
+                    <div class="card-body pt-2">
+                        <p class="card-description mb-4">
+                            Coverage along the reference genome.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" data-masonry='{"percentPosition": true }'>
+
+            <div class="col-lg-12">
+                <div class="card border-dark mb-2">
+                    <h5 class="card-header text-primary text-uppercase">Strain aligned data</h5>
+                    <div class="container w-50">
+                        <div class="row">
+                            <div class="col-lg-6">
+                        <select data-optgroup="10201" class="form-select strainaligned_select_species m-3 input-sm">
+                            <option value="1001" data-sp="s__Salmonella_enterica">Salmonella enterica</option>
+                            <option value="1002" data-sp="s__Escherichia_coli">Escherichia coli</option>
+                            <option value="1002" data-sp="s__Listeria_monocytogenes" selected="selected">Listeria monocytogenes</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <select data-optgroup="10201" class="form-select strainaligned_select_date m-3 input-sm">
+                            <option value="1001" data-date="Apr26">April 2022</option>
+                            <option value="1002" data-date="Jul26">July 2022</option>
+                            <option value="1002" data-date="Aug3" selected="selected">August 2022</option>
+                        </select>
+                    </div>
+                    </div>
+                        </div>
+    
+                    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Aug3_strain.html" id="strainaligned"></iframe>
+                    </div>
+
+                    <div class="card-body pt-2">
+                        <p class="card-description mb-4">
+                            Coverage along the genome of the sequenced strain. The strains are <em>E. coli</em> O157EDL933, <em>L. monocytogenes</em> 4b str. 02-1289 and <em>S. enterica</em> ATCC14028
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-7">
+                    <div class="card border-dark mb-2">
+                        <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1" id="genomepca_parent">
+                            <iframe height="600" width="600"
+                            src="https://bfssiadrianverster.shinyapps.io/genome_bin_pca/" id = "asdwqe"></iframe>
+
+                        </div>
+    
+                        <div class="card-body pt-2">
+                            <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">Genome coverage PCA</span>
+                            <p class="card-description mb-4">
+                                This graph shows batch effects in the relationship between GC content and sequencing depth. Different sequencing runs will have a different correlation between GC content and sequencing depth. This graph splits the genome into bins, which vary in GC content, normalizes the sequencing depth and then uses PCA to visualize these batch effects. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+    
+
+            </div>
+
 </section>
 
 
@@ -337,6 +440,47 @@
 
 
 <script>
+
+    // Set up the shiny app after the page has loaded
+
+    // document.onload = function() {
+    // iframe = document.createElement("iframe")
+    // iframe.setAttribute('height', '600');
+    // iframe.setAttribute('width', '600');
+    // iframe.setAttribute('src', 'https://bfssiadrianverster.shinyapps.io/genome_bin_pca/');
+    // document.getElementById("genomepca_parent").appendChild(iframe); 
+    // }
+    // create the name
+    function create_plotly_path(species,date, plotly_genome_tag) {
+        return "./plotly/" + species + "_" + date + "_" + plotly_genome_tag + ".html"
+    }
+
+    var species_ref = $( '.refaligned_select_species' ).find( "option:selected" ).data( "sp" );
+    var date_ref = $('.refaligned_select_date').find( "option:selected" ).data( "date" );
+    $('.refaligned_select_species').change(function () {
+        species_ref = $( this ).find( "option:selected" ).data( "sp" );
+        $('#refaligned').attr("src", create_plotly_path(species_ref,date_ref, "reference"));
+    });
+    $('.refaligned_select_date').change(function () {
+        date_ref = $( this ).find( "option:selected" ).data( "date" );
+        $('#refaligned').attr("src", create_plotly_path(species_ref,date_ref, "reference"));
+    });
+
+    var species_strain = $( '.strainaligned_select_species' ).find( "option:selected" ).data( "sp" );
+    var date_strain = $('.strainaligned_select_date').find( "option:selected" ).data( "date" );
+    $('.strainaligned_select_species').change(function () {
+        species_strain = $( this ).find( "option:selected" ).data( "sp" );
+        console.log(species_strain);
+        console.log(date_strain);
+        $('#strainaligned').attr("src", create_plotly_path(species_strain,date_strain, "strain"));
+    });
+    $('.strainaligned_select_date').change(function () {
+        date_strain = $( this ).find( "option:selected" ).data( "date" );
+        $('#strainaligned').attr("src", create_plotly_path(species_strain,date_strain, "strain"));
+    });
+
+
+
     $('.qualitybins_select').change(function () {
         $('#qualitybins_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
     });
