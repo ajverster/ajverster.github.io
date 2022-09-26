@@ -284,37 +284,40 @@
             </div>
             <div class="col-lg-6">
                 <div class="card border-dark mb-2">
-                    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                        <img src="./assets/ListeriaSNPs.png" class="img-fluid border-radius-lg">
-                    </div>
+                    <h5 class="card-header text-primary text-uppercase">SNPs</h5>
+                    <div class="container w-50">
+                        <div class="row">
+                            <select data-optgroup="10201" class="form-select snp_select_species m-3 input-sm">
+                                <option value="1001" data-sp="Senterica_ATCC14028">Salmonella enterica</option>
+                                <option value="1002" data-sp="EcoliO157EDL933">Escherichia coli</option>
+                                <option value="1002" data-sp="Lmonocytogenes_4b" selected="selected">Listeria monocytogenes</option>
+                                </select>
+                            </div>
 
-                    <div class="card-body pt-2">
-                        <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">SNP Identification overlap</span>
-                        <p class="card-description mb-4">
-                            The overlap between Listeria monocytogenes SNPs identified with either the powerblade or the standard library preparation.
-                        </p>
+                        <div class="row" id="qweqweqwe">
+                            <select data-optgroup="10201" class="form-select snp_select_date m-3 input-sm">
+                                <option value="1001" data-date="Apr26-2022">April 2022</option>
+                                <option value="1002" data-date="Jul26-2022">July 2022</option>
+                                <option value="1002" data-date="Aug3-2022" selected="selected">August 2022</option>
+                            </select>
+                        </div>
                     </div>
+    
+                        <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                            <img src="./assets/Aug3-2022-SNPs_Lmonocytogenes_4b.png" class="img-fluid border-radius-lg" id="snp_graph">
+                        </div>
+    
+                        <div class="card-body pt-2">
+                            <p class="card-description mb-4">
+                                The overlap between Listeria monocytogenes SNPs identified with either the powerblade or the standard library preparation.
+                            </p>
+                        </div>
                 </div>
             </div>
-
-            <!-- <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                        <iframe height="600" width="600"
-                                src="p1.html"></iframe>
-                    </div>
-
-                    <div class="card-body pt-2">
-                        <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">Phylogenetic Tree</span>
-                        <p class="card-description mb-4">
-                            A description of the graph
-                        </p>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
-    </div>
+        </div>
+
 
 
 
@@ -451,6 +454,23 @@
     // iframe.setAttribute('src', 'https://bfssiadrianverster.shinyapps.io/genome_bin_pca/');
     // document.getElementById("genomepca_parent").appendChild(iframe); 
     // }
+    // create the name
+    function create_snp_graph_name(species,date) {
+        return "./assets/" + date + "-SNPs_" + species + ".png"
+    }
+
+    var species_snp = $( '.snp_select_species' ).find( "option:selected" ).data( "sp" );
+    var date_snp = $('.snp_select_date').find( "option:selected" ).data( "date" );
+    $('.snp_select_species').change(function () {
+        species_snp = $( this ).find( "option:selected" ).data( "sp" );
+        $('#snp_graph').attr("src", create_snp_graph_name(species_snp, date_snp));
+    });
+    $('.snp_select_date').change(function () {
+        date_snp = $( this ).find( "option:selected" ).data( "date" );
+        $('#snp_graph').attr("src", create_snp_graph_name(species_snp,date_snp));
+    });
+
+
     // create the name
     function create_plotly_path(species,date, plotly_genome_tag) {
         return "./plotly/" + species + "_" + date + "_" + plotly_genome_tag + ".html"
