@@ -410,7 +410,7 @@
 
             <div class="col-lg-12">
                 <div class="card border-dark mb-2">
-                    <h5 class="card-header text-primary text-uppercase">Strain aligned data with SNPs</h5>
+                    <h5 class="card-header text-primary text-uppercase" id="coverage_snps">Strain aligned data with SNPs</h5>
                     <div class="container w-50">
                         <div class="row">
                             <div class="col-lg-6">
@@ -445,8 +445,31 @@
         </div>
 
 
-        <div class="container">
             <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card border-dark mb-2">
+                            <h5 class="card-header text-primary text-uppercase" id="coverage_snps">Coverage and GC content relationship</h5>
+                            <div class="container w-50">
+                                <select data-optgroup="10201" class="form-select genome_coverage_gc_select m-3 input-sm">
+                                    <option value="1001" data-img-src="./assets/CovgCorrelation_Senterica_ATCC14028.png">Salmonella enterica</option>
+                                    <option value="1002" data-img-src="./assets/CovgCorrelation_EcoliO157EDL933.png">Escherichia coli</option>
+                                    <option value="1002" data-img-src="./assets/CovgCorrelation_Lmonocytogenes_4b.png" selected="selected">Listeria monocytogenes</option>
+                                </select>
+                            </div>
+            
+                            <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                                <img src="./assets/CovgCorrelation_Lmonocytogenes_4b.png" class="img-fluid border-radius-lg" id="genome_coverage_gc_graph">
+                            </div>
+        
+                            <div class="card-body pt-2">
+                                <p class="card-description mb-4">
+                                    The correlation between coverage and GC content in 1000 bins along the genome. A bin needs a minimum average coverage of 10 to be considered.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        
+
 
                 <div class="col-lg-7">
                     <div class="card border-dark mb-2">
@@ -466,7 +489,6 @@
                     </div>
                 </div>
                 </div>
-            </div>
     
 
             </div>
@@ -546,8 +568,6 @@
     var date_strain = $('.strainalignedsnps_select_date').find( "option:selected" ).data( "date" );
     $('.strainalignedsnps_select_species').change(function () {
         species_strain = $( this ).find( "option:selected" ).data( "sp" );
-        console.log(species_strain);
-        console.log(date_strain);
         $('#strainalignedsnps').attr("src", create_plotly_path(species_strain,date_strain, "strain", true));
     });
     $('.strainalignedsnps_select_date').change(function () {
@@ -555,7 +575,9 @@
         $('#strainalignedsnps').attr("src", create_plotly_path(species_strain,date_strain, "strain", true));
     });
 
-
+    $('.genome_coverage_gc_select').change(function () {
+        $('#genome_coverage_gc_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
+    });
 
     $('.qualitybins_select').change(function () {
         $('#qualitybins_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
