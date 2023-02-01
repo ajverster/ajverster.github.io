@@ -408,14 +408,18 @@
                         <select data-optgroup="10201" class="form-select strainaligned_select_date m-3 input-sm">
                             <option value="1001" data-date="Apr26">April 2022</option>
                             <option value="1002" data-date="Jul26">July 2022</option>
-                            <option value="1002" data-date="Aug3" selected="selected">August 2022</option>
+                            <option value="1002" data-date="Aug3" >August 2022</option>
+                            <option value="1002" data-date="Dec2022Rep1" >December 2022 Rep 1</option>
+                            <option value="1002" data-date="Dec2022Rep2" >December 2022 Rep 2</option>
+                            <option value="1002" data-date="Dec2022Rep3" selected="selected">December 2022 Rep 3</option>
+
                         </select>
                     </div>
                     </div>
                         </div>
     
                     <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Aug3_strain.html" id="strainaligned"></iframe>
+                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Dec2022Rep3_strain.html" id="strainaligned"></iframe>
                     </div>
 
                     <div class="card-body pt-2">
@@ -447,14 +451,17 @@
                         <select data-optgroup="10201" class="form-select strainalignedsnps_select_date m-3 input-sm">
                             <option value="1001" data-date="Apr26">April 2022</option>
                             <option value="1002" data-date="Jul26">July 2022</option>
-                            <option value="1002" data-date="Aug3" selected="selected">August 2022</option>
+                            <option value="1002" data-date="Aug3" >August 2022</option>
+                            <option value="1002" data-date="Dec2022Rep1" >December 2022 Rep 1</option>
+                            <option value="1002" data-date="Dec2022Rep2" >December 2022 Rep 2</option>
+                            <option value="1002" data-date="Dec2022Rep3" selected="selected">December 2022 Rep 3</option>
                         </select>
                     </div>
                     </div>
                         </div>
     
                     <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Aug3_strain_withSNPs.html" id="strainalignedsnps"></iframe>
+                        <iframe height="500" width="900" src="./plotly/s__Listeria_monocytogenes_Dec2022Rep3_strain_withSNPs.html" id="strainalignedsnps"></iframe>
                     </div>
 
                     <div class="card-body pt-2">
@@ -472,16 +479,29 @@
                     <div class="col-lg-9">
                         <div class="card border-dark mb-2">
                             <h5 class="card-header text-primary text-uppercase" id="coverage_snps">Coverage and GC content relationship</h5>
+                            
+                            
                             <div class="container w-50">
-                                <select data-optgroup="10201" class="form-select genome_coverage_gc_select m-3 input-sm">
-                                    <option value="1001" data-img-src="./assets/CovgCorrelation_Senterica_ATCC14028.png">Salmonella enterica</option>
-                                    <option value="1002" data-img-src="./assets/CovgCorrelation_EcoliO157EDL933.png">Escherichia coli</option>
-                                    <option value="1002" data-img-src="./assets/CovgCorrelation_Lmonocytogenes_4b.png" selected="selected">Listeria monocytogenes</option>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                <select data-optgroup="10201" class="form-select genome_coverage_gc_select_species m-3 input-sm">
+                                    <option value="1001" data-sp="Senterica_ATCC14028">Salmonella enterica</option>
+                                    <option value="1002" data-sp="EcoliO157EDL933">Escherichia coli</option>
+                                    <option value="1002" data-sp="Lmonocytogenes_4b" selected="selected">Listeria monocytogenes</option>
                                 </select>
                             </div>
-            
+                            <div class="col-lg-6">
+                                <select data-optgroup="10201" class="form-select genome_coverage_gc_select_date m-3 input-sm">
+                                    <option value="1001" data-date="Apr-Jul-Aug-2022">April-July-August</option>
+                                    <option value="1002" data-date="Dec2022">December</option>
+                                </select>
+                            </div>
+                            </div>
+                                </div>
+        
+                           
                             <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                                <img src="./assets/CovgCorrelation_Lmonocytogenes_4b.png" class="img-fluid border-radius-lg" id="genome_coverage_gc_graph">
+                                <img src="./assets/Dec2022CovgCorrelation_Lmonocytogenes_4b.png" class="img-fluid border-radius-lg" id="genome_coverage_gc_graph">
                             </div>
         
                             <div class="card-body pt-2">
@@ -598,9 +618,26 @@
         $('#strainalignedsnps').attr("src", create_plotly_path(species_strain,date_strain, "strain", true));
     });
 
-    $('.genome_coverage_gc_select').change(function () {
-        $('#genome_coverage_gc_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
+    var species_covg = $( '.genome_coverage_gc_select_species' ).find( "option:selected" ).data( "sp" );
+    var date_covg = $('.genome_coverage_gc_select_date').find( "option:selected" ).data( "date" );
+   // $('.genome_coverage_gc_select').change(function () {
+    //    $('#genome_coverage_gc_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
+   // });
+
+    // create the name
+    function create_covg_graph_path(species,date) {
+        return "./assets/" + date + "CovgCorrelation_" + species + ".png"
+    }
+
+   $('.genome_coverage_gc_select_species').change(function () {
+        species_covg = $( this ).find( "option:selected" ).data( "sp" );
+        $('#genome_coverage_gc_graph').attr("src", create_covg_graph_path(species_covg,date_covg));
     });
+    $('.genome_coverage_gc_select_date').change(function () {
+        date_covg = $( this ).find( "option:selected" ).data( "date" );
+        $('#genome_coverage_gc_graph').attr("src", create_covg_graph_path(species_covg,date_covg));
+    });
+
 
     $('.qualitybins_select').change(function () {
         $('#qualitybins_graph').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
